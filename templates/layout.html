@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Ubaydullokh">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+	<title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+	{%block navbar%}
+		
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  			<a class="navbar-brand" href="{{url_for('hello')}}">Bookinza</a>
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    			<ul class="navbar-nav mr-auto">
+      				<li class="nav-item active">
+        				<a class="nav-link" href="{{url_for('list')}}">Index <span class="sr-only">(current)</span></a>
+      				</li>
+      				<li class="nav-item active">
+        				<a class="nav-link" href="#">Reviews</a>
+      				</li>
+      				<li class="nav-item dropdown active">
+        				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         					 Additional Info
+        				</a>
+        				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          				<a class="dropdown-item" href="#">FAQ</a>
+          				<a class="dropdown-item" href="#">ABOUT US</a>
+          				<div class="dropdown-divider"></div>
+          				<a class="dropdown-item" href="#">CONTACT US</a>
+        				</div>
+      				</li>
+      				<li class="nav-item">
+        				<a class="nav-link disabled" href="#">Not Allowed For You Yet</a>
+      				</li>
+    				</ul>
+            {%if no_display%}
+    				<button type="button" class="btn btn-primary float-right p-3" data-toggle="modal" data-target="#exampleModal1">
+  Log In
+</button>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+  <h2 class="col-9 ml-2">Log In</h2>
+  <form action="{{url_for('login')}}" method="post">
+    <div class="col-9">
+        <div class="col">
+        <label for="exampleInputEmail1">Email address</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+          </div>
+          <div class="col">
+          <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+        </div>
+        <div class="mt-2"> 
+        <button type="submit" class="btn btn-outline-primary ml-5">Submit</button>
+        </div>
+      </div>
+      
+  </form>
+</div>
+</div>
+</div>
+<button type="button" class="btn btn-primary float-right p-3" data-toggle="modal" data-target="#exampleModal">
+  Register Now
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+  <h2 class="col-9 ml-2">Registration</h2>
+  <form action="{{url_for('registration')}}" method="post">
+    <div class="col-9">
+      
+        <div class="col">
+          <label for="first_name">Enter Your First Name:</label>
+            <input type="text" name="name" class="form-control" id="first_name" placeholder="First name">
+        </div>
+        <div class="col">
+          <label for="last_name">Enter Your Last Name:</label>
+            <input type="text" name="lastname" class="form-control" id="last_name" placeholder="Last name">
+        </div>
+        <div class="col">
+        <label for="exampleInputEmail1">Email address</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="col">
+          <label for="age">Your Age</label>
+            <input type="number" name="age" class="form-control" id="age" placeholder="Age">
+        </div>
+        <div class="col">
+          <label for="country">Your Country</label>
+            <select id="country"name="country"  class="form-control">
+                {%for country in countries%}
+                <option value="{{country.countrycode}}">{{country.countryname}}</option>
+                {%endfor%}
+            </select>
+        </div>
+          <div class="col">
+          <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="mt-2"> 
+        <button type="submit" class="btn btn-outline-primary ml-5">Submit</button>
+        </div>
+      </div>
+      
+  </form>
+</div>
+</div>
+</div>  {%else%}
+          <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{name}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item" type="button">Personal Page</button>
+    <button class="dropdown-item" type="button"><a href="{{url_for('again')}}" style="text-decoration: none;color: black;">Go Search</a></button>
+    <button class="dropdown-item" type="button"><a href="{{url_for('logout')}}" style="text-decoration: none;color: black;">Wanna Log Out</a></button>
+  </div>
+</div>
+{%endif%}
+  </div>
+</nav>
+
+	{%endblock%}
+	{%block heading%}
+  
+	{%endblock%}
+	{%block body%}
+	{%endblock%}
+</body>
+</html>

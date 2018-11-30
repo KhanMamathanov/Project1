@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Welcome to Bookinza !!!
+{% endblock %}
+{%block heading%}
+<h1 class="text-center text-dark bg-light">Index:</h1>
+{%endblock%}
+{%block body%}
+<form action="{{url_for('list')}}" method="post">
+<label for="country">Filter By ISBN</label>
+    <select id="filter" name="filter" class="form-control">
+        <option value="asc_1">Ascending</option>
+        <option value="desc_1">Descending</option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+<!-- This is table of books-->
+<table class="table table-hover">
+  <thead>
+    <tr class="table-active">
+      <th scope="col">ISBN</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">AUTHOR</th>
+      <th scope="col">PUBLICATION YEAR</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{%for book in books%}
+    <tr style="cursor: pointer;">
+      <th scope="row">{{book.isbn}}</th>
+      <td>{{book.title}}</td>
+      <td> {{book.author}} </td>
+      <td> {{book.year}} </td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+
+{%endblock%}

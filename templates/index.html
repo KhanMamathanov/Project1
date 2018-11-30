@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Welcome to Bookinza !!!
+{% endblock %}
+{% block body %}
+
+<div class="card-columns align-items-center">
+  <div class="card" style="border-top-left-radius: 50px;border-top-right-radius: 50px">
+    <img class="card-img-top" src="{{url_for('static',filename='avatar.png')}}" alt="Card image cap" height="150" width="auto" style="border-top-left-radius: 50px;border-top-right-radius: 50px">
+    <div class="card-body">
+      <h5 class="card-title">Welcome Mr.{{name}}</h5>
+      <p class="card-text">Welcome to Bookinza where you access to more than 5000 books of various genres,
+      authors and publication years.This is the place for real book lovers.</p>
+    </div>
+  </div>
+</div>
+  {%for book in books%}
+    <article class="mx-auto" style="width: 31.3333%;border: 1px solid silver;box-sizing: border-box;border-radius: 5px;background-color: #fafafa;margin-right: 2%;min-height: 400px;">
+        <img src="{{url_for('static',filename='book.png')}}" alt="Book" title="Book" style="width: 100%;height: 150px;border-radius: 5px 5px 0px 0px;border-bottom: 1px solid silver;margin-bottom: 10px;border-top-left-radius: 35px;border-top-right-radius: 35px">
+        <h2 class="text-center" style="width: 90%;margin-left: 5%;font-weight: normal;font-size: 1.7em;color: #4a4a4a;"> {{book.title}} </h2>
+        <p class="text-center" style="width: 80%;margin-top: 5px;margin-left: 10px;text-indent: 1em;">Author: {{book.author}} </p>
+        <p class="text-center" style="width: 80%;margin-top: 5px;margin-left: 10px;text-indent: 1em;">ISBN: {{book.isbn}} </p>
+        <p class="text-center" style="width: 80%;margin-top: 5px;margin-left: 10px;text-indent: 1em;">Publication Year: {{book.year}} </p>
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" style="padding: 5px;background-color: #ed7b7b;margin-left: 5%;border-radius: 10px;color: #fff;float: left;margin-top: 10px;margin-bottom: 10px;">
+  Read More
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle"> {{book.title}} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center text-primary bg-light">Author: {{book.author}}</p>
+        <p class="text-center text-primary bg-light">Publication Year: {{book.year}}</p>
+        <p class="text-center text-primary bg-light">ISBN: {{book.isbn}}</p>
+
+        <p class="text-justify text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore totam cumque minus dolor corporis corrupti, harum, ab deserunt amet in reprehenderit! Id eligendi in labore ipsa. Facere commodi, explicabo reiciendis.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex facilis, voluptate rem et sequi distinctio aspernatur a id accusantium recusandae hic deserunt, minus blanditiis vitae delectus numquam fugit sed minima!
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil rerum nulla maxime quasi reiciendis. Est soluta eveniet itaque iste dolore tenetur numquam, molestiae accusamus voluptates a! Iste aspernatur dignissimos voluptate!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </article>
+  {%endfor%}
+  
+{% endblock %}
